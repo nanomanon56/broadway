@@ -14,7 +14,6 @@ class PlaysController < ApplicationController
 
   def create
     @play = Play.new(play_params)
-
     if @play.save
       redirect_to root_path
       #refresh the page and the data is lost if not saved
@@ -22,7 +21,24 @@ class PlaysController < ApplicationController
       render 'new'
       #render does not refresh the page, left to save if fails
     end
+
+  def edit
   end
+
+  def update
+     if @play.update(play_params)
+       redirect_to play_path(@play)
+    else
+      render 'edit'
+    end
+ end
+
+  def destroy
+    @play.destroy
+    redirect_to root_path
+  end
+
+end
 
 private
 
